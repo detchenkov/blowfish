@@ -1,12 +1,12 @@
 /********** blowfish.cc **********/
 
+#include "blowfish.h"
 #include <iostream>
 #include <string.h>
-#include "blowfish.h"
 
 
-#define F(x)    (((SB[0][x.byte.zero] + SB[1][x.byte.one]) ^ SB[2][x.byte.two]) +
-SB[3][x.byte.three])
+
+#define F(x) (((SB[0][x.byte.zero] + SB[1][x.byte.one]) ^ SB[2][x.byte.two]) + SB[3][x.byte.three])
 
 
 void Blowfish::Gen_Subkeys(char *Passwd)
@@ -385,12 +385,12 @@ void Blowfish::Set_Passwd(char *Passwd)
   char New_Passwd[MAX_STRING];
   unsigned int i,len;
 
-	if (Passwd == NULL)
+  if (Passwd == NULL)
+  {
+    do
 	{
-	do
-	{
-	cout << "\aEnter your password: ";
-	cin.get(New_Passwd,MAX_STRING,'\n');
+        std::cout << "\aEnter your password: ";
+        std::cin.get(New_Passwd,MAX_STRING,'\n');
 	len = strlen(New_Passwd);
 	}
 	while (len > MAX_PASSWD);
@@ -416,12 +416,11 @@ void Blowfish::Encrypt(void *Ptr,unsigned int N_Bytes)
 
   if (N_Bytes%8)
   {
-    cerr << "\aBlowfish requires the input to be a multiple of 8 bytes (64
-bits) to work.\n";
+    std::cerr << "\aBlowfish requires the input to be a multiple of 8 bytes (64 bits) to work.\n";
     return;
   }
 
-	N_Bytes /= 8;
+  N_Bytes /= 8;
   Work = (DWord *)Ptr;
 
   for (i=0;i<N_Bytes;i++)
@@ -440,12 +439,11 @@ void Blowfish::Decrypt(void *Ptr,unsigned int N_Bytes)
 
   if (N_Bytes%8)
   {
-    cerr << "\aBlowfish requires the input to be a multiple of 8 bytes (64
-bits) to work.\n";
+    std::cerr << "\aBlowfish requires the input to be a multiple of 8 bytes (64 bits) to work.\n";
     return;
   }
 
-	N_Bytes /= 8;
+  N_Bytes /= 8;
   Work = (DWord *)Ptr;
   for (i=0;i<N_Bytes;i++)
   {

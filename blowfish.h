@@ -10,23 +10,27 @@
 #define MAX_STRING   256
 #define MAX_PASSWD   56  // 448bits
 
-#ifdef BIG_ENDIAN
-struct WordByte
-{
-	unsigned int zero:8;
-	unsigned int one:8;
-	unsigned int two:8;
-	unsigned int three:8;
-};
-#endif
+//Choose your bit order
+//#define BIG_ENDIAN
+//#define LITTLE_ENDIAN
+
+//#ifdef BIG_ENDIAN
+//struct WordByte
+//{
+//	unsigned int zero:8;
+//	unsigned int one:8;
+//	unsigned int two:8;
+//	unsigned int three:8;
+//};
+//#endif
 
 #ifdef LITTLE_ENDIAN
 struct WordByte
 {
-	unsigned int three:8;
-	unsigned int two:8;
-	unsigned int one:8;
-	unsigned int zero:8;
+        unsigned int three:8;
+        unsigned int two:8;
+        unsigned int one:8;
+        unsigned int zero:8;
 };
 #endif
 
